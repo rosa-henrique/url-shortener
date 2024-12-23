@@ -1,3 +1,3 @@
 namespace UrlShortener.Api.Dto;
 
-public class CreateShortUrlResponse(string LongUrl, string ShortUrl);
+public record CreateShortUrlResponse(string LongUrl, string ShortUrl);

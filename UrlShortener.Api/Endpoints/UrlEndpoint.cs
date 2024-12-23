@@ -7,7 +7,7 @@ public static class UrlEndpoint
 {
     public static WebApplication UseUrlEndpoint(this WebApplication app)
     {
-        app.MapGet("{shortUrl}", async (Table<Url> urlTable, string shortUrl) =>
+        app.MapGet("{shortUrl}", async (string shortUrl, Table<Url> urlTable) =>
             {
                 var url = await urlTable.FirstOrDefault(u => u.ShortUrl == shortUrl)
                                             .ExecuteAsync()
