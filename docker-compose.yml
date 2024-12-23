@@ -1,0 +1,26 @@
+﻿services:
+  urlshortener.api:
+    image: ${DOCKER_REGISTRY-}urlshortener.api
+    container_name: UrlShortener.Api
+    build:
+      context: .
+      dockerfile: UrlShortener.Api/Dockerfile
+    environment:
+      CassandraConfig__Hosts__0: "cassandra"
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+      
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_USER=admin
+      - CASSANDRA_PASSWORD=admin
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+
+volumes:
+  cassandra-data:
